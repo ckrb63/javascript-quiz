@@ -1,24 +1,35 @@
 import { useAtom } from "jotai";
 import { Button } from "./ui/button";
-import { isSubmitButtonClickedAtom, quizIndexAtom } from "@/app/page";
+import { isSubmittedAtom, quizIndexAtom } from "@/app/page";
 import { quizCategoryAtom } from "./Header";
 import { quizMap, quizMapPointer } from "@/data/quiz";
 import { QuizCategories } from "@/types/quiz";
 
 export default function QuizController() {
-  const [isClicked, setIsClicked] = useAtom(isSubmitButtonClickedAtom);
+  const [isClicked, setIsClicked] = useAtom(isSubmittedAtom);
   const [quizIndex, setQuizIndex] = useAtom(quizIndexAtom);
   const [selectedCategory, setSelectedCategory] = useAtom(quizCategoryAtom);
 
   const onClickNextButton = () => {
-    if (quizIndex < quizMap[selectedCategory].length - 1) {
-      setQuizIndex(quizIndex + 1);
+    const hasMoreQuizzes = quizIndex < quizMap[selectedCategory].length - 1;
+
+    if (hasMoreQuizzes) {
+      goToNextQuiz();
     } else {
-      if (quizMapPointer[selectedCategory]) {
-        setSelectedCategory(quizMapPointer[selectedCategory] as QuizCategories);
-      } else {
-        alert("It is last Question!");
-      }
+      handleLastQuiz();
+    }
+  };
+
+  const goToNextQuiz = () => {
+    setQuizIndex(quizIndex + 1);
+  };
+
+  const handleLastQuiz = () => {
+    const nextCategory = quizMapPointer[selectedCategory];
+    if (nextCategory) {
+      setSelectedCategory(quizMapPointer[selectedCategory] as QuizCategories);
+    } else {
+      alert("It is last Category, last Question!");
     }
   };
 

@@ -1,14 +1,14 @@
-import { isSubmitButtonClickedAtom, languageAtom } from "@/app/page";
+import { isSubmittedAtom, languageAtom } from "@/app/page";
 import { useAtom } from "jotai";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { Quiz, QuizAnswerType } from "@/types/quiz";
+import { Quiz } from "@/types/quiz";
 
 interface ExplanationProps {
-  quiz: Quiz<QuizAnswerType>;
+  quiz: Quiz;
 }
 
 export default function Explanation({ quiz }: ExplanationProps) {
-  const [isClicked] = useAtom(isSubmitButtonClickedAtom);
+  const [isClicked] = useAtom(isSubmittedAtom);
   const [language] = useAtom(languageAtom);
 
   return (

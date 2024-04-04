@@ -1,9 +1,9 @@
-import { Quiz, QuizAnswerType, QuizCategories } from "@/types/quiz";
+import { Quiz, QuizCategories } from "@/types/quiz";
 import { EventLoopQuizList } from "./quizzes/event-loop";
 import { HoistingQuizList } from "./quizzes/hoisting";
 
 type QuizMap = {
-  [key in QuizCategories]: Quiz<QuizAnswerType>[];
+  [key in QuizCategories]: Quiz[];
 };
 
 export const quizMap: QuizMap = {

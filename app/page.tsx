@@ -10,7 +10,7 @@ import Explanation from "@/components/Explanation";
 import { InternationalString } from "@/types/quiz";
 
 export const quizIndexAtom = atom(0);
-export const isSubmitButtonClickedAtom = atom(false);
+export const isSubmittedAtom = atom(false);
 export const languageAtom = atom<keyof InternationalString>("kr");
 
 export default function Home() {
@@ -26,7 +26,7 @@ export default function Home() {
       <div className="flex h-screen w-screen items-center justify-center bg-white pb-4">
         <Question quiz={quiz} />
         <div className="w-1/3">
-          <Answer quiz={quiz} />
+          <Answer />
           <QuizController />
         </div>
         <Explanation quiz={quiz} />

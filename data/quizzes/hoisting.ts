@@ -1,3 +1,3 @@
-import { Quiz, QuizAnswerType } from "@/types/quiz";
+import { Quiz } from "@/types/quiz";
 
-export const HoistingQuizList: Quiz<QuizAnswerType>[] = [];
+export const HoistingQuizList: Quiz[] = [];

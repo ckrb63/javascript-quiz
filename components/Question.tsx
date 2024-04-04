@@ -8,12 +8,12 @@ import {
 } from "./ui/card";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import { Quiz, QuizAnswerType } from "@/types/quiz";
+import { Quiz } from "@/types/quiz";
 import { languageAtom } from "@/app/page";
 import { useAtom } from "jotai";
 
 interface QuestionProps {
-  quiz: Quiz<QuizAnswerType>;
+  quiz: Quiz;
 }
 
 export default function Question({ quiz }: QuestionProps) {

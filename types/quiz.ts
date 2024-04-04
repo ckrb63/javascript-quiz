@@ -10,9 +10,7 @@ export type QuizOption = {
 
 export type QuizType = "Order" | "Select" | "MultiSelect";
 
-export type QuizAnswerType = number | number[];
-
-export type Quiz<T> = {
+export type Quiz = {
   id: string;
   category: QuizCategories;
   type: QuizType;
@@ -20,7 +18,7 @@ export type Quiz<T> = {
   description?: InternationalString;
   code?: string;
   options: QuizOption[];
-  answer: T;
+  answer: number[];
   explanation: InternationalString;
 };
 
