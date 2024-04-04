@@ -9,17 +9,23 @@ import {
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { Quiz, QuizAnswerType } from "@/types/quiz";
+import { languageAtom } from "@/app/page";
+import { useAtom } from "jotai";
 
 interface QuestionProps {
   quiz: Quiz<QuizAnswerType>;
 }
 
 export default function Question({ quiz }: QuestionProps) {
+  const [language] = useAtom(languageAtom);
+
   return (
     <Card className="m-4 w-1/3">
       <CardHeader>
-        <CardTitle>{quiz.question}</CardTitle>
-        <CardDescription>{quiz.description}</CardDescription>
+        <CardTitle>{quiz.question[language]}</CardTitle>
+        {quiz.description && (
+          <CardDescription>{quiz.description[language]}</CardDescription>
+        )}
       </CardHeader>
       {quiz.code && (
         <CardContent>

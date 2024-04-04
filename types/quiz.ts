@@ -1,19 +1,27 @@
+export type InternationalString = {
+  en: string;
+  kr: string;
+};
+
 export type QuizOption = {
   number: number;
-  text: string;
+  text: InternationalString;
 };
+
+export type QuizType = "Order" | "Select" | "MultiSelect";
 
 export type QuizAnswerType = number | number[];
 
 export type Quiz<T> = {
   id: string;
   category: QuizCategories;
-  question: string;
-  description?: string;
+  type: QuizType;
+  question: InternationalString;
+  description?: InternationalString;
   code?: string;
   options: QuizOption[];
   answer: T;
-  explanation: string;
+  explanation: InternationalString;
 };
 
 export type QuizCategories =

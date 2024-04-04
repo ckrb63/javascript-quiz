@@ -10,13 +10,14 @@ import {
 import { ScrollArea } from "./ui/scroll-area";
 import { atom, useAtom } from "jotai";
 import { quizMap } from "@/data/quiz";
-import { quizIndexAtom } from "@/app/page";
+import { languageAtom, quizIndexAtom } from "@/app/page";
 
 export const quizCategoryAtom = atom<QuizCategories>("EventLoop");
 
 export default function Header() {
   const [selectedCategory, setSelectedCategory] = useAtom(quizCategoryAtom);
   const [quizIndex, setQuizIndex] = useAtom(quizIndexAtom);
+  const [language] = useAtom(languageAtom);
 
   const quiz = quizMap[selectedCategory][quizIndex];
 
@@ -59,7 +60,7 @@ export default function Header() {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuTrigger>
-              {quiz.id} {quiz.question}
+              {quiz.id} {quiz.question[language]}
             </NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid gap-3 p-6 md:w-[250px] lg:w-[350px]">
@@ -74,7 +75,7 @@ export default function Header() {
                         <div
                           className={`${i === quizIndex && "bg-accent text-accent-foreground"} block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground`}
                         >
-                          {quiz.question}
+                          {quiz.question[language]}
                         </div>
                       </NavigationMenuLink>
                     </li>
