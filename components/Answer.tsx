@@ -6,6 +6,7 @@ import { CheckCircle2 } from "lucide-react";
 import { useEffect } from "react";
 import { quizCategoryAtom } from "./Header";
 import { quizMap } from "@/data/quiz";
+import BacktickStylingString from "./Backtick";
 
 export const selectedAnswerAtom = atom<number[]>([]);
 
@@ -23,7 +24,8 @@ export default function Answer() {
   }, [quizIndex, quizCategory]);
 
   const handleSingleSelect = (answerNumber: number) => {
-    setSelectedAnswer([answerNumber]);
+    if (selectedAnswer[0] === answerNumber) setSelectedAnswer([]);
+    else setSelectedAnswer([answerNumber]);
   };
 
   const handleMultiSelect = (answerNumber: number) => {
@@ -72,8 +74,14 @@ export default function Answer() {
             />
             <CardHeader>
               <div className="flex items-center space-x-2">
-                <label className="cursor-pointer" htmlFor={`${option}${index}`}>
-                  {option.number} {option.text[language]}
+                <label
+                  className="flex cursor-pointer"
+                  htmlFor={`${option}${index}`}
+                >
+                  <p className="mr-3">{option.number}</p>{" "}
+                  <p>
+                    <BacktickStylingString text={option.text[language]} />
+                  </p>
                 </label>
               </div>
             </CardHeader>

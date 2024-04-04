@@ -1,4 +1,7 @@
-import { orderOptionsGenerator } from "@/lib/options";
+import {
+  descriptionMap,
+  orderOptionsGenerator,
+} from "@/lib/quiz-text-generator";
 import { Quiz } from "@/types/quiz";
 
 export const EventLoopQuizList: Quiz[] = [
@@ -7,14 +10,11 @@ export const EventLoopQuizList: Quiz[] = [
     category: "EventLoop",
     type: "Order",
     question: {
-      en: "Predict the order of logging",
-      kr: "출력되는 순서를 예측하세요",
+      en: "Q1. Predict the order of logging",
+      kr: "Q1. 어떤 순서로 출력될까요?",
     },
     options: orderOptionsGenerator(6),
-    description: {
-      en: "Look at the code, predict the order in which it is output to the console, and select and submit it in order",
-      kr: "코드를 보고 콘솔에 출력되는 순서를 예측하여 순서대로 선택하여 제출하세요",
-    },
+    description: descriptionMap.Order,
     code: `new Promise(() => console.log(1));
 
 Promise.resolve().then(() => console.log(2))

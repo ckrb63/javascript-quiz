@@ -11,13 +11,14 @@ import { ScrollArea } from "./ui/scroll-area";
 import { atom, useAtom } from "jotai";
 import { quizMap } from "@/data/quiz";
 import { languageAtom, quizIndexAtom } from "@/app/page";
+import { languageMap } from "@/lib/language";
 
 export const quizCategoryAtom = atom<QuizCategories>("EventLoop");
 
 export default function Header() {
   const [selectedCategory, setSelectedCategory] = useAtom(quizCategoryAtom);
   const [quizIndex, setQuizIndex] = useAtom(quizIndexAtom);
-  const [language] = useAtom(languageAtom);
+  const [language, setLanguage] = useAtom(languageAtom);
 
   const quiz = quizMap[selectedCategory][quizIndex];
 
@@ -81,6 +82,25 @@ export default function Header() {
                     </li>
                   ))}
                 </ScrollArea>
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+        </NavigationMenuList>
+      </NavigationMenu>
+      <NavigationMenu>
+        <NavigationMenuList>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>Language</NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <ul className="grid w-40 gap-3 p-3">
+                {languageMap.map((lang) => (
+                  <li
+                    onClick={() => setLanguage(lang.shortName)}
+                    className={`${lang.shortName === language && "underline"} block cursor-pointer select-none space-y-1 rounded-md p-3 leading-none outline-none transition-colors hover:text-accent-foreground hover:underline`}
+                  >
+                    {lang.flag} {lang.fullName}
+                  </li>
+                ))}
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
