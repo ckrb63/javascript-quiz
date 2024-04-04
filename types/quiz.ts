@@ -7,11 +7,22 @@ export type QuizAnswerType = number | number[];
 
 export type Quiz<T> = {
   id: string;
-  category: string;
+  category: QuizCategories;
   question: string;
   description?: string;
-  code: string;
+  code?: string;
   options: QuizOption[];
   answer: T;
   explanation: string;
 };
+
+export type QuizCategories =
+  | "EventLoop"
+  | "Hoisting"
+  | "Module"
+  | "Scope"
+  | "Closure"
+  | "Class"
+  | "Prototype"
+  | "Generators"
+  | "Numbers";

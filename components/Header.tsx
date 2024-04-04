@@ -1,4 +1,4 @@
-import { Quiz, QuizAnswerType } from "@/types/quiz";
+import { QuizCategories } from "@/types/quiz";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -8,37 +8,76 @@ import {
   NavigationMenuTrigger,
 } from "./ui/navigation-menu";
 import { ScrollArea } from "./ui/scroll-area";
+import { atom, useAtom } from "jotai";
+import { quizMap } from "@/data/quiz";
+import { quizIndexAtom } from "@/app/page";
 
-interface HeaderProps {
-  quizList: Quiz<QuizAnswerType>[];
-}
+export const quizCategoryAtom = atom<QuizCategories>("EventLoop");
 
-export default function Header({ quizList }: HeaderProps) {
+export default function Header() {
+  const [selectedCategory, setSelectedCategory] = useAtom(quizCategoryAtom);
+  const [quizIndex, setQuizIndex] = useAtom(quizIndexAtom);
+
+  const quiz = quizMap[selectedCategory][quizIndex];
+
+  const onClickCategory = (category: QuizCategories) => {
+    if (category !== selectedCategory) {
+      setQuizIndex(0);
+      setSelectedCategory(category);
+    }
+  };
+
   return (
-    <div>
+    <div className="flex w-screen justify-between border border-b p-2">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
+            <NavigationMenuTrigger>{selectedCategory}</NavigationMenuTrigger>
             <NavigationMenuContent>
-              <ul className="grid gap-3 p-6 md:w-[200px] lg:w-[300px]">
-                <li className="row-span-3">
-                  <NavigationMenuLink asChild>
-                    <div className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                      123
-                    </div>
-                  </NavigationMenuLink>
-                </li>
+              <ul className="grid gap-3 p-6 md:w-[250px] lg:w-[350px]">
+                <ScrollArea>
+                  {Object.keys(quizMap).map((category) => (
+                    <li
+                      key={category}
+                      className="row-span-3 cursor-pointer"
+                      onClick={() =>
+                        onClickCategory(category as QuizCategories)
+                      }
+                    >
+                      <NavigationMenuLink asChild>
+                        <div
+                          className={`${category === selectedCategory && "bg-accent text-accent-foreground"} block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground`}
+                        >
+                          {category}
+                        </div>
+                      </NavigationMenuLink>
+                    </li>
+                  ))}
+                </ScrollArea>
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuTrigger>Quiz List</NavigationMenuTrigger>
+            <NavigationMenuTrigger>
+              {quiz.id} {quiz.question}
+            </NavigationMenuTrigger>
             <NavigationMenuContent>
-              <ul className="grid h-[500px] gap-3 p-6 md:w-[250px] lg:w-[350px]">
-                <ScrollArea>
-                  {quizList.map((quiz) => (
-                    <List question={quiz.question} id={quiz.id} />
+              <ul className="grid gap-3 p-6 md:w-[250px] lg:w-[350px]">
+                <ScrollArea className="max-h-[500px]">
+                  {quizMap[selectedCategory].map((quiz, i) => (
+                    <li
+                      key={`${quiz.id} ${quiz.question}`}
+                      className="row-span-3 cursor-pointer"
+                      onClick={() => setQuizIndex(i)}
+                    >
+                      <NavigationMenuLink asChild>
+                        <div
+                          className={`${i === quizIndex && "bg-accent text-accent-foreground"} block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground`}
+                        >
+                          {quiz.question}
+                        </div>
+                      </NavigationMenuLink>
+                    </li>
                   ))}
                 </ScrollArea>
               </ul>
@@ -47,22 +86,5 @@ export default function Header({ quizList }: HeaderProps) {
         </NavigationMenuList>
       </NavigationMenu>
     </div>
-  );
-}
-
-interface ListProps {
-  id: string;
-  question: string;
-}
-
-function List({ id, question }: ListProps) {
-  return (
-    <li className="row-span-3" onClick={() => console.log(id)}>
-      <NavigationMenuLink asChild>
-        <div className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-          {question}
-        </div>
-      </NavigationMenuLink>
-    </li>
   );
 }

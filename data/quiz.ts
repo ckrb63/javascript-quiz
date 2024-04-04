@@ -1,244 +1,33 @@
-import { Quiz, QuizAnswerType } from "@/types/quiz";
+import { Quiz, QuizAnswerType, QuizCategories } from "@/types/quiz";
+import { EventLoopQuizList } from "./quizzes/event-loop";
+import { HoistingQuizList } from "./quizzes/hoisting";
 
-export const quizList: Quiz<QuizAnswerType>[] = [
-  {
-    id: "1",
-    category: "event-loop",
-    question: "select log orders",
-    options: [
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-    ],
-    description: "just select",
-    code: `function add(a, b) {
-      return a + b;
-}`,
-    answer: 1,
-    explanation: "this is this",
-  },
-  {
-    id: "1",
-    category: "event-loop",
-    question: "select log orders",
-    options: [
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-    ],
-    description: "just select",
-    code: `function add(a, b) {
-      return a + b;
-}`,
-    answer: 1,
-    explanation: "this is this",
-  },
-  {
-    id: "1",
-    category: "event-loop",
-    question: "select log orders",
-    options: [
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-    ],
-    description: "just select",
-    code: `function add(a, b) {
-      return a + b;
-}`,
-    answer: 1,
-    explanation: "this is this",
-  },
-  {
-    id: "1",
-    category: "event-loop",
-    question: "select log orders",
-    options: [
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-    ],
-    description: "just select",
-    code: `function add(a, b) {
-      return a + b;
-}`,
-    answer: 1,
-    explanation: "this is this",
-  },
-  {
-    id: "1",
-    category: "event-loop",
-    question: "select log orders",
-    options: [
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-    ],
-    description: "just select",
-    code: `function add(a, b) {
-      return a + b;
-}`,
-    answer: 1,
-    explanation: "this is this",
-  },
-  {
-    id: "1",
-    category: "event-loop",
-    question: "select log orders",
-    options: [
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-    ],
-    description: "just select",
-    code: `function add(a, b) {
-      return a + b;
-}`,
-    answer: 1,
-    explanation: "this is this",
-  },
-  {
-    id: "1",
-    category: "event-loop",
-    question: "select log orders",
-    options: [
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-    ],
-    description: "just select",
-    code: `function add(a, b) {
-      return a + b;
-}`,
-    answer: 1,
-    explanation: "this is this",
-  },
-  {
-    id: "1",
-    category: "event-loop",
-    question: "select log orders",
-    options: [
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-    ],
-    description: "just select",
-    code: `function add(a, b) {
-      return a + b;
-}`,
-    answer: 1,
-    explanation: "this is this",
-  },
-  {
-    id: "1",
-    category: "event-loop",
-    question: "select log orders",
-    options: [
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-    ],
-    description: "just select",
-    code: `function add(a, b) {
-      return a + b;
-}`,
-    answer: 1,
-    explanation: "this is this",
-  },
-  {
-    id: "1",
-    category: "event-loop",
-    question: "select log orders",
-    options: [
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-    ],
-    description: "just select",
-    code: `function add(a, b) {
-      return a + b;
-}`,
-    answer: 1,
-    explanation: "this is this",
-  },
-  {
-    id: "1",
-    category: "event-loop",
-    question: "select log orders",
-    options: [
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-    ],
-    description: "just select",
-    code: `function add(a, b) {
-      return a + b;
-}`,
-    answer: 1,
-    explanation: "this is this",
-  },
-  {
-    id: "1",
-    category: "event-loop",
-    question: "select log orders",
-    options: [
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-    ],
-    description: "just select",
-    code: `function add(a, b) {
-      return a + b;
-}`,
-    answer: 1,
-    explanation: "this is this",
-  },
-  {
-    id: "1",
-    category: "event-loop",
-    question: "select log orders",
-    options: [
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-    ],
-    description: "just select",
-    code: `function add(a, b) {
-      return a + b;
-}`,
-    answer: 1,
-    explanation: "this is this",
-  },
-  {
-    id: "1",
-    category: "event-loop",
-    question: "select log orders",
-    options: [
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-    ],
-    description: "just select",
-    code: `function add(a, b) {
-      return a + b;
-}`,
-    answer: 1,
-    explanation: "this is this",
-  },
-  {
-    id: "1",
-    category: "event-loop",
-    question: "select log orders",
-    options: [
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-      { number: 1, text: "console.log(1)" },
-    ],
-    description: "just select",
-    code: `function add(a, b) {
-      return a + b;
-}`,
-    answer: 1,
-    explanation: "this is this",
-  },
-];
+type QuizMap = {
+  [key in QuizCategories]: Quiz<QuizAnswerType>[];
+};
+
+export const quizMap: QuizMap = {
+  EventLoop: EventLoopQuizList,
+  Hoisting: HoistingQuizList,
+  Module: [],
+  Scope: [],
+  Closure: [],
+  Class: [],
+  Prototype: [],
+  Generators: [],
+  Numbers: [],
+};
+
+export const quizMapPointer: {
+  [key in QuizCategories]: QuizCategories | null;
+} = {
+  EventLoop: "Hoisting",
+  Hoisting: "Module",
+  Module: "Scope",
+  Scope: "Closure",
+  Closure: "Class",
+  Class: "Prototype",
+  Prototype: "Generators",
+  Generators: "Numbers",
+  Numbers: null,
+};
