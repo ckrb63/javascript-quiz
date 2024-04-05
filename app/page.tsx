@@ -9,6 +9,7 @@ import QuizController from "@/components/QuizController";
 import Explanation from "@/components/Explanation";
 import { InternationalString } from "@/types/quiz";
 import { useEffect } from "react";
+import { MobileHeader } from "@/components/MobileHeader";
 
 export const quizIndexAtom = atom(0);
 export const isSubmittedAtom = atom(false);
@@ -31,6 +32,7 @@ export default function Home() {
 
   return (
     <div className="h-screen md:overflow-hidden">
+      <MobileHeader />
       <Header />
       <div className="w-screen items-center justify-center bg-white pb-4 md:flex md:h-screen">
         <Question quiz={quiz} />

@@ -25,7 +25,8 @@ setTimeout(() => console.log(5), 0);
 
 queueMicrotask(() => console.log(6));
 
-console.log(7);`,
+console.log(7);
+`,
     answer: [1, 7, 2, 6, 4, 5],
     explanation: {
       en: `Answer: 1 7 2 6 4 5

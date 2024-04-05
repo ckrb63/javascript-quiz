@@ -18,6 +18,7 @@ export default function QuizController() {
     } else {
       handleLastQuiz();
     }
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const goToNextQuiz = () => {
@@ -27,6 +28,7 @@ export default function QuizController() {
   const handleLastQuiz = () => {
     const nextCategory = quizMapPointer[selectedCategory];
     if (nextCategory) {
+      setQuizIndex(0);
       setSelectedCategory(quizMapPointer[selectedCategory] as QuizCategories);
     } else {
       alert("It is last Category, last Question!");

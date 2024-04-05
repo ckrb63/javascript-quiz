@@ -31,62 +31,65 @@ export default function Header() {
 
   return (
     <div className="hidden w-screen justify-between border border-b p-2 md:flex">
-      <NavigationMenu>
-        <NavigationMenuList>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>{selectedCategory}</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="grid gap-3 p-6 md:w-[250px] lg:w-[350px]">
-                <ScrollArea>
-                  {Object.keys(quizMap).map((category) => (
-                    <li
-                      key={category}
-                      className="row-span-3 cursor-pointer"
-                      onClick={() =>
-                        onClickCategory(category as QuizCategories)
-                      }
-                    >
-                      <NavigationMenuLink asChild>
-                        <div
-                          className={`${category === selectedCategory && "bg-accent text-accent-foreground"} block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground`}
-                        >
-                          {category}
-                        </div>
-                      </NavigationMenuLink>
-                    </li>
-                  ))}
-                </ScrollArea>
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>
-              {quiz.question[language]}
-            </NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="grid gap-3 p-6 md:w-[250px] lg:w-[350px]">
-                <ScrollArea className="max-h-[500px]">
-                  {quizMap[selectedCategory].map((quiz, i) => (
-                    <li
-                      key={`${quiz.id} ${quiz.question}`}
-                      className="row-span-3 cursor-pointer"
-                      onClick={() => setQuizIndex(i)}
-                    >
-                      <NavigationMenuLink asChild>
-                        <div
-                          className={`${i === quizIndex && "bg-accent text-accent-foreground"} block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground`}
-                        >
-                          {quiz.question[language]}
-                        </div>
-                      </NavigationMenuLink>
-                    </li>
-                  ))}
-                </ScrollArea>
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
+      <div className="flex items-center">
+        <h2 className="mx-4 font-semibold">JS Quiz</h2>
+        <NavigationMenu>
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>{selectedCategory}</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="grid gap-3 p-6 md:w-[250px] lg:w-[350px]">
+                  <ScrollArea>
+                    {Object.keys(quizMap).map((category) => (
+                      <li
+                        key={category}
+                        className="row-span-3 cursor-pointer"
+                        onClick={() =>
+                          onClickCategory(category as QuizCategories)
+                        }
+                      >
+                        <NavigationMenuLink asChild>
+                          <div
+                            className={`${category === selectedCategory && "bg-accent text-accent-foreground"} block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground`}
+                          >
+                            {category}
+                          </div>
+                        </NavigationMenuLink>
+                      </li>
+                    ))}
+                  </ScrollArea>
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>
+                {quiz.question[language]}
+              </NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="grid gap-3 p-6 md:w-[250px] lg:w-[350px]">
+                  <ScrollArea className="max-h-[500px]">
+                    {quizMap[selectedCategory].map((quiz, i) => (
+                      <li
+                        key={`${quiz.id} ${quiz.question}`}
+                        className="row-span-3 cursor-pointer"
+                        onClick={() => setQuizIndex(i)}
+                      >
+                        <NavigationMenuLink asChild>
+                          <div
+                            className={`${i === quizIndex && "bg-accent text-accent-foreground"} block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground`}
+                          >
+                            {quiz.question[language]}
+                          </div>
+                        </NavigationMenuLink>
+                      </li>
+                    ))}
+                  </ScrollArea>
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+      </div>
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
@@ -95,6 +98,7 @@ export default function Header() {
               <ul className="grid w-40 gap-3 p-3">
                 {languageMap.map((lang) => (
                   <li
+                    key={lang.fullName}
                     onClick={() => setLanguage(lang.shortName)}
                     className={`${lang.shortName === language && "underline"} block cursor-pointer select-none space-y-1 rounded-md p-3 leading-none outline-none transition-colors hover:text-accent-foreground hover:underline`}
                   >

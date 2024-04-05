@@ -3,7 +3,6 @@ import { Card, CardHeader } from "./ui/card";
 import { atom, useAtom } from "jotai";
 import { isSubmittedAtom, languageAtom, quizIndexAtom } from "@/app/page";
 import { ArrowRightIcon, CheckCircle2 } from "lucide-react";
-import { useEffect } from "react";
 import { quizCategoryAtom } from "./Header";
 import { quizMap } from "@/data/quiz";
 import BacktickStylingString from "./CodeStyleText";
