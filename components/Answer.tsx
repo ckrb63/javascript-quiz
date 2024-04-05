@@ -1,12 +1,12 @@
-import { Quiz, QuizType } from "@/types/quiz";
+import { QuizType } from "@/types/quiz";
 import { Card, CardHeader } from "./ui/card";
 import { atom, useAtom } from "jotai";
 import { isSubmittedAtom, languageAtom, quizIndexAtom } from "@/app/page";
-import { CheckCircle2 } from "lucide-react";
+import { ArrowRightIcon, CheckCircle2 } from "lucide-react";
 import { useEffect } from "react";
 import { quizCategoryAtom } from "./Header";
 import { quizMap } from "@/data/quiz";
-import BacktickStylingString from "./Backtick";
+import BacktickStylingString from "./CodeStyleText";
 
 export const selectedAnswerAtom = atom<number[]>([]);
 
@@ -18,10 +18,6 @@ export default function Answer() {
   const [isSubmitted] = useAtom(isSubmittedAtom);
 
   const quiz = quizMap[quizCategory][quizIndex];
-
-  useEffect(() => {
-    setSelectedAnswer([]);
-  }, [quizIndex, quizCategory]);
 
   const handleSingleSelect = (answerNumber: number) => {
     if (selectedAnswer[0] === answerNumber) setSelectedAnswer([]);
@@ -55,19 +51,19 @@ export default function Answer() {
     <>
       {quiz.options.map((option, index) => {
         const isOptionSelected = selectedAnswer.includes(index + 1);
-        const isRealAnswer = quiz.answer.includes(index + 1);
+        const isAnswer = quiz.answer.includes(index + 1);
         return (
           <Card
-            className={`relative m-2 ${!isSubmitted && "cursor-pointer"} ${isOptionSelected && "bg-slate-300"}`}
+            className={`relative m-4 ${!isSubmitted && "cursor-pointer"} ${isOptionSelected && "bg-slate-300"}`}
             onClick={() => onClickOption(index + 1)}
           >
-            <CheckAnswerIcon
+            <AnswerBadge
               isSubmitted={isSubmitted}
-              isAnswer={isRealAnswer}
-              type={quiz.type}
+              isAnswer={isAnswer}
+              quizType={quiz.type}
             />
-            <OrderIcon
-              quiz={quiz}
+            <OrderBadge
+              quizType={quiz.type}
               answer={quiz.answer.indexOf(index + 1)}
               order={selectedAnswer.indexOf(index + 1)}
               isSubmitted={isSubmitted}
@@ -92,21 +88,17 @@ export default function Answer() {
   );
 }
 
-interface CheckAnswerIconProps {
-  isSubmitted: boolean;
+interface AnswerBadgeProps {
+  quizType: QuizType;
   isAnswer: boolean;
-  type: QuizType;
+  isSubmitted: boolean;
 }
 
-function CheckAnswerIcon({
-  isSubmitted,
-  isAnswer,
-  type,
-}: CheckAnswerIconProps) {
-  const isValid = isSubmitted && isAnswer && type === "Select";
+function AnswerBadge({ quizType, isAnswer, isSubmitted }: AnswerBadgeProps) {
+  const shouldRender = isSubmitted && isAnswer && quizType === "Select";
 
   return (
-    isValid && (
+    shouldRender && (
       <div className="absolute left-[-10px] top-[-10px]">
         <CheckCircle2 width={25} height={25} color="green" />
       </div>
@@ -114,32 +106,42 @@ function CheckAnswerIcon({
   );
 }
 
-interface OrderIconProps {
-  quiz: Quiz;
+interface OrderBadgeProps {
+  quizType: QuizType;
   order: number;
   answer: number;
   isSubmitted: boolean;
 }
 
-function OrderIcon({ quiz, answer, order, isSubmitted }: OrderIconProps) {
-  const isSubmittedAndCorrect = answer === order && isSubmitted;
-  const isSubmittedAndWrong = answer !== order && isSubmitted;
+function OrderBadge({ quizType, answer, order, isSubmitted }: OrderBadgeProps) {
+  const isCorrect = answer === order && isSubmitted;
+  const isWrong = answer !== order && isSubmitted;
+  const isOptionSelected = order >= 0;
+  const shouldRender =
+    quizType === "Order" && (isOptionSelected || isSubmitted);
 
-  const orderIconColor = isSubmittedAndCorrect
-    ? "border-green-700 text-green-700"
-    : isSubmittedAndWrong
-      ? "border-red-400 text-red-400"
-      : "border-gray-400 text-gray-400";
+  const getOrderBadgeColor = (isCorrect: boolean, isWrong: boolean) => {
+    if (isCorrect) return "border-green-700 text-green-700";
+    if (isWrong) return "border-red-400 text-red-400";
+    return "border-gray-400 text-gray-400";
+  };
+
+  const badgeColor = getOrderBadgeColor(isCorrect, isWrong);
 
   return (
-    quiz.type === "Order" &&
-    order >= 0 && (
-      <div>
+    shouldRender && (
+      <div className="absolute left-[-10px] top-[-10px] flex items-center">
         <div
-          className={`absolute left-[-10px] top-[-10px] flex h-[22px] w-[22px] items-center justify-center rounded-full border-2 text-sm ${orderIconColor}`}
+          className={`flex h-[22px] w-[22px] items-center justify-center rounded-full border-2 text-sm ${badgeColor}`}
         >
-          {order + 1}
+          {!isOptionSelected ? "X" : order + 1}
         </div>
+        {isWrong && <ArrowRightIcon color="rgb(248,113,113)" />}
+        {isWrong && (
+          <div className="flex h-[22px] w-[22px] items-center justify-center rounded-full border-2 border-green-700 text-sm text-green-700">
+            {answer + 1}
+          </div>
+        )}
       </div>
     )
   );

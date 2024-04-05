@@ -30,7 +30,7 @@ export default function Header() {
   };
 
   return (
-    <div className="flex w-screen justify-between border border-b p-2">
+    <div className="hidden w-screen justify-between border border-b p-2 md:flex">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
@@ -61,7 +61,7 @@ export default function Header() {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuTrigger>
-              {quiz.id} {quiz.question[language]}
+              {quiz.question[language]}
             </NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid gap-3 p-6 md:w-[250px] lg:w-[350px]">

@@ -1,6 +1,5 @@
-export default function BacktickStylingString({ text }: { text: string }) {
-  const parts = text.split(/`([^`]+)`/);
-  console.log(parts);
+export default function CodeStyleText({ text }: { text: string }) {
+  const parts = text.split(/'([^']+)'/); // Divide by Single Quote ''
   return parts.map((part, index) =>
     index % 2 === 1 ? (
       <span

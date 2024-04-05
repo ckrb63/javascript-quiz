@@ -11,7 +11,7 @@ export const HoistingQuizList: Quiz[] = [
       kr: "Q1. 어떻게 출력될까요?",
     },
     options: [
-      { number: 1, text: { en: "`foo` and `bar`", kr: "`foo` 그리고 `bar`" } },
+      { number: 1, text: { en: "'foo' and 'bar'", kr: "'foo' 그리고 'bar'" } },
     ],
     description: descriptionMap.Select,
     code: `console.log(foo);

@@ -6,13 +6,13 @@ import { quizMap, quizMapPointer } from "@/data/quiz";
 import { QuizCategories } from "@/types/quiz";
 
 export default function QuizController() {
-  const [isClicked, setIsClicked] = useAtom(isSubmittedAtom);
+  const [isSubmitted, setIsSubmitted] = useAtom(isSubmittedAtom);
   const [quizIndex, setQuizIndex] = useAtom(quizIndexAtom);
   const [selectedCategory, setSelectedCategory] = useAtom(quizCategoryAtom);
 
   const onClickNextButton = () => {
     const hasMoreQuizzes = quizIndex < quizMap[selectedCategory].length - 1;
-
+    setIsSubmitted(false);
     if (hasMoreQuizzes) {
       goToNextQuiz();
     } else {
@@ -34,11 +34,18 @@ export default function QuizController() {
   };
 
   return (
-    <div className="flex flex-col  justify-center">
-      <Button className="m-2" onClick={() => setIsClicked(!isClicked)}>
-        {isClicked ? "Hide Answer" : "Submit"}
+    <div className="flex flex-col justify-center">
+      <Button
+        className="mx-4 my-1"
+        onClick={() => setIsSubmitted(!isSubmitted)}
+      >
+        {isSubmitted ? "Hide Answer" : "Submit"}
       </Button>
-      <Button className="m-2" variant="secondary" onClick={onClickNextButton}>
+      <Button
+        className="mx-4 my-1"
+        variant="secondary"
+        onClick={onClickNextButton}
+      >
         Next
       </Button>
     </div>

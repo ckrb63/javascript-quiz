@@ -20,7 +20,7 @@ export default function Question({ quiz }: QuestionProps) {
   const [language] = useAtom(languageAtom);
 
   return (
-    <Card className="m-4 w-1/3">
+    <Card className="m-4 mt-16 md:mt-0 md:w-1/3">
       <CardHeader>
         <CardTitle>{quiz.question[language]}</CardTitle>
         {quiz.description && (
