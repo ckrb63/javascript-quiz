@@ -3,6 +3,7 @@
 import Header, { quizCategoryAtom } from "@/components/Header";
 import { quizMap } from "@/data/quiz";
 import { atom, useAtom, useSetAtom } from "jotai";
+import { atomWithStorage, loadable } from "jotai/utils";
 import Question from "@/components/Question";
 import Answer, { selectedAnswerAtom } from "@/components/Answer";
 import QuizController from "@/components/QuizController";
@@ -13,11 +14,17 @@ import { MobileHeader } from "@/components/MobileHeader";
 
 export const quizIndexAtom = atom(0);
 export const isSubmittedAtom = atom(false);
-export const languageAtom = atom<keyof InternationalString>("kr");
+export const languageAtom = atomWithStorage<keyof InternationalString>(
+  "language",
+  "kr",
+);
+export const asyncLanguageAtom = atom(async (get) => get(languageAtom));
+export const loadableAtom = loadable(asyncLanguageAtom);
 
 export default function Home() {
   const [selectedCategory] = useAtom(quizCategoryAtom);
   const [quizIndex] = useAtom(quizIndexAtom);
+  const [language] = useAtom(loadableAtom);
   const setSelectedAnswer = useSetAtom(selectedAnswerAtom);
   const setIsSubmitted = useSetAtom(isSubmittedAtom);
 
@@ -29,6 +36,7 @@ export default function Home() {
   }, [quiz]);
 
   if (!quiz) return;
+  if (language.state === "loading") return;
 
   return (
     <div className="h-screen md:overflow-hidden">

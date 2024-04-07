@@ -53,6 +53,7 @@ export default function Answer() {
         const isAnswer = quiz.answer.includes(index + 1);
         return (
           <Card
+            key={`${option.number} ${option.text}`}
             className={`relative m-4 ${!isSubmitted && "cursor-pointer"} ${isOptionSelected && "bg-slate-300"}`}
             onClick={() => onClickOption(index + 1)}
           >
