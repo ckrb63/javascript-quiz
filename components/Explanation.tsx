@@ -19,13 +19,13 @@ export default function Explanation({ quiz }: ExplanationProps) {
         <CardHeader>
           <CardTitle>Explanation</CardTitle>
         </CardHeader>
-        <CardContent>
-          <ScrollArea className="md:max-h-[80vh]">
+        <ScrollArea className="overflow-scroll md:max-h-[80vh]">
+          <CardContent>
             <p className="whitespace-pre-wrap">
               <CodeStyleText text={quiz.explanation[language]} />
             </p>
-          </ScrollArea>
-        </CardContent>
+          </CardContent>
+        </ScrollArea>
       </Card>
     )
   );

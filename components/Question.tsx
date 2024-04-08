@@ -20,7 +20,7 @@ export default function Question({ quiz }: QuestionProps) {
   const [language] = useAtom(languageAtom);
 
   return (
-    <Card className="md:scrollbar scrollbar-thumb-slate-300 m-4 md:mt-0 md:max-h-[80vh] md:w-1/3 md:overflow-y-scroll">
+    <Card className="m-4 scrollbar-thumb-slate-300 md:mt-0 md:max-h-[80vh] md:w-1/2 md:overflow-y-scroll md:scrollbar lg:w-1/3">
       <CardHeader>
         <CardTitle>{quiz.question[language]}</CardTitle>
         {quiz.description && (

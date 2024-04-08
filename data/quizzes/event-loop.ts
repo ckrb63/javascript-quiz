@@ -48,26 +48,46 @@ console.log(7);
     category: "EventLoop",
     type: "Select",
     question: {
-      en: "Predict the order of logging",
-      kr: "출력되는 순서를 예측하세요",
+      en: "Q2. What values will be logged?",
+      kr: "Q2. 어떤 값들이 출력될까요?",
     },
-    options: orderOptionsGenerator(4),
+    options: [
+      {
+        number: 1,
+        text: { kr: "'1 2 3' 그리고 '0 1 2'", en: "'1 2 3' and '0 1 2'" },
+      },
+      {
+        number: 2,
+        text: { kr: "'3 3 3' 그리고 '0 1 2'", en: "'3 3 3' and '0 1 2'" },
+      },
+      {
+        number: 3,
+        text: { kr: "'0 1 2' 그리고 '3 3 3'", en: "'0 1 2' and '3 3 3'" },
+      },
+      {
+        number: 4,
+        text: { kr: "'0 1 2' 그리고 '0 1 2'", en: "'0 1 2' and '0 1 2'" },
+      },
+    ],
     description: {
-      en: "Look at the code, predict the order in which it is output to the console, and select and submit it in order",
-      kr: "코드를 보고 콘솔에 출력되는 순서를 예측하여 순서대로 선택하여 제출하세요",
+      en: "Consider i declared var and let",
+      kr: "var와 let으로 선언된 i를 고려하세요",
     },
-    code: `new Promise(() => console.log(1));
+    code: `for(let i = 0; i < 3; i++){
+  setTimeout(() => console.log(i), 0);
+}
 
-Promise.resolve().then(() => console.log(2))
-  .catch(() => console.log(3))
-  .finally(() => console.log(4));
-
-setTimeout(() => console.log(5), 0);
-
-queueMicrotask(() => console.log(6));
-
-console.log(7);`,
+for(var i = 0; i < 3 ; i++){
+  setTimeout( () => console.log(i), 0);
+}`,
     answer: [1],
-    explanation: { en: "this is this", kr: "" },
+    explanation: {
+      en: `The callback function in 'setTimeout' is called after all loops are executed.
+      \nEach variable declared 'let' is a block-scope, so each has a new value.
+      \nThe variable declared 'var' becomes a global value, and all have a value of '3' when the callback function is called.`,
+      kr: `'setTimeout'의 콜백 함수는 모든 루프가 실행된 후에 호출됩니다. 
+    \n'let'으로 선언된 변수는 블록-스코프이기 때문에 각각 새로운 값을 가집니다.
+    \n'var'로 선언된 변수는 전역 값이 되어 콜백 함수가 호출될 땐 모두 '3'의 값을 가집니다.`,
+    },
   },
 ];
