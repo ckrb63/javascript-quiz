@@ -1,3 +1,5 @@
+"use client";
+
 import { languageAtom } from "@/app/atom";
 import {
   AccordionContent,

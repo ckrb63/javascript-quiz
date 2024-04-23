@@ -1,3 +1,5 @@
+"use client";
+
 import { languageAtom, quizIndexAtom, quizzesAtom } from "@/app/atom";
 import {
   AccordionContent,
