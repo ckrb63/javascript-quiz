@@ -1,9 +1,8 @@
 "use client";
 
-import { useAtom, useAtomValue } from "jotai";
+import { useAtomValue } from "jotai";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { InternationalString, Quiz } from "@/types/quiz";
-import CodeStyleText from "../CodeStyleText";
+import CodeStyleText from "../../../components/CodeStyleText";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   isSubmittedAtom,
@@ -11,12 +10,6 @@ import {
   quizIndexAtom,
   quizzesAtom,
 } from "../../atom";
-
-interface ExplanationProps {
-  quiz: Quiz;
-  language: keyof InternationalString;
-  isClicked: boolean;
-}
 
 export default function Explanation() {
   const isClicked = useAtomValue(isSubmittedAtom);

@@ -10,12 +10,12 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 
 export default function QuizSelector() {
-  const [quizzes] = useAtom(quizzesAtom);
+  const quizzes = useAtomValue(quizzesAtom);
   const [quizIndex, setQuizIndex] = useAtom(quizIndexAtom);
-  const [language, setLanguage] = useAtom(languageAtom);
+  const language = useAtomValue(languageAtom);
 
   const quiz = quizzes[quizIndex];
 

@@ -8,7 +8,6 @@ import ServerComponent from "../components/ServerComponent";
 import HomeAtomProvider from "./atom";
 
 export default function Home() {
-  console.log("is server");
   return (
     <HomeAtomProvider>
       <div className="h-screen md:overflow-hidden">
