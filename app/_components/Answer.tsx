@@ -1,11 +1,17 @@
+"use client";
+
 import { QuizType } from "@/types/quiz";
-import { Card, CardHeader } from "./ui/card";
+import { Card, CardHeader } from "../../components/ui/card";
 import { atom, useAtom } from "jotai";
-import { isSubmittedAtom, languageAtom, quizIndexAtom } from "@/app/page";
 import { ArrowRightIcon, CheckCircle2 } from "lucide-react";
-import { quizCategoryAtom } from "./Header";
-import { quizMap } from "@/data/quiz";
 import BacktickStylingString from "./CodeStyleText";
+import ServerComponent from "../../components/ServerComponent";
+import {
+  isSubmittedAtom,
+  languageAtom,
+  quizIndexAtom,
+  quizzesAtom,
+} from "../atom";
 
 export const selectedAnswerAtom = atom<number[]>([]);
 
@@ -13,10 +19,10 @@ export default function Answer() {
   const [language] = useAtom(languageAtom);
   const [selectedAnswer, setSelectedAnswer] = useAtom(selectedAnswerAtom);
   const [quizIndex] = useAtom(quizIndexAtom);
-  const [quizCategory] = useAtom(quizCategoryAtom);
+  const [quizzes] = useAtom(quizzesAtom);
   const [isSubmitted] = useAtom(isSubmittedAtom);
 
-  const quiz = quizMap[quizCategory][quizIndex];
+  const quiz = quizzes[quizIndex];
 
   const handleSingleSelect = (answerNumber: number) => {
     if (selectedAnswer[0] === answerNumber) setSelectedAnswer([]);

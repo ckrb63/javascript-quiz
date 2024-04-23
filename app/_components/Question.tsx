@@ -1,22 +1,22 @@
-import { ScrollArea } from "./ui/scroll-area";
+"use client";
+
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "./ui/card";
+} from "@/components/ui/card";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { Quiz } from "@/types/quiz";
-import { languageAtom } from "@/app/page";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
+import { languageAtom, quizIndexAtom, quizzesAtom } from "../atom";
 
-interface QuestionProps {
-  quiz: Quiz;
-}
-
-export default function Question({ quiz }: QuestionProps) {
+export default function Question() {
+  const quizzes = useAtomValue(quizzesAtom);
+  const quizIndex = useAtomValue(quizIndexAtom);
+  const quiz = quizzes[quizIndex];
   const [language] = useAtom(languageAtom);
 
   return (

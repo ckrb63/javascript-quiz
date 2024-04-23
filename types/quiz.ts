@@ -12,7 +12,7 @@ export type QuizType = "Order" | "Select" | "MultiSelect";
 
 export type Quiz = {
   id: string;
-  category: QuizCategories;
+  tags: QuizCategories[];
   type: QuizType;
   question: InternationalString;
   description?: InternationalString;
@@ -32,3 +32,15 @@ export type QuizCategories =
   | "Prototype"
   | "Generators"
   | "Numbers";
+
+export const QuizCategoriesKeys: QuizCategories[] = [
+  "EventLoop",
+  "Hoisting",
+  "Module",
+  "Scope",
+  "Closure",
+  "Class",
+  "Prototype",
+  "Generators",
+  "Numbers",
+];
