@@ -1,7 +1,7 @@
 "use client";
 
 import { Card } from "../../../components/ui/card";
-import { atom, useAtom } from "jotai";
+import { atom, useAtom, useAtomValue } from "jotai";
 import {
   isSubmittedAtom,
   languageAtom,
@@ -15,11 +15,11 @@ import AnswerText from "./AnswerText";
 export const selectedAnswerAtom = atom<number[]>([]);
 
 export default function Answer() {
-  const [language] = useAtom(languageAtom);
   const [selectedAnswer, setSelectedAnswer] = useAtom(selectedAnswerAtom);
-  const [quizIndex] = useAtom(quizIndexAtom);
-  const [quizzes] = useAtom(quizzesAtom);
-  const [isSubmitted] = useAtom(isSubmittedAtom);
+  const isSubmitted = useAtomValue(isSubmittedAtom);
+  const quizIndex = useAtomValue(quizIndexAtom);
+  const quizzes = useAtomValue(quizzesAtom);
+  const language = useAtomValue(languageAtom);
 
   const quiz = quizzes[quizIndex];
 
