@@ -1,17 +1,15 @@
 import Header from "./_components/Header";
 import Question from "./_components/Question";
 import Answer from "@/app/_components/Answer";
-import QuizController from "./_components/QuizController";
+import QuizController from "./_components/Controller";
 import Explanation from "./_components/Explanation";
 import { MobileHeader } from "./_components/MobileHeader";
-import ServerComponent from "../components/ServerComponent";
 import HomeAtomProvider from "./atom";
 
 export default function Home() {
   return (
     <HomeAtomProvider>
       <div className="h-screen md:overflow-hidden">
-        <ServerComponent />
         <MobileHeader />
         <Header />
         <div className="w-screen items-center justify-center bg-white pb-4 md:flex md:h-screen">
