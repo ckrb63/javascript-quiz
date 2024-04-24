@@ -1,27 +1,18 @@
 "use client";
 
 import { Card } from "../../../components/ui/card";
-import { atom, useAtom, useAtomValue } from "jotai";
-import {
-  isSubmittedAtom,
-  languageAtom,
-  quizIndexAtom,
-  quizzesAtom,
-} from "../../atom";
+import { useAtom, useAtomValue } from "jotai";
+import { isSubmittedAtom, selectedAnswerAtom } from "../../atom";
 import AnswerBadge from "./AnswerBadge";
 import OrderBadge from "./OrderBadge";
 import AnswerText from "./AnswerText";
-
-export const selectedAnswerAtom = atom<number[]>([]);
+import { useQuiz } from "@/hooks/useQuiz";
+import { useMemo } from "react";
 
 export default function Answer() {
   const [selectedAnswer, setSelectedAnswer] = useAtom(selectedAnswerAtom);
   const isSubmitted = useAtomValue(isSubmittedAtom);
-  const quizIndex = useAtomValue(quizIndexAtom);
-  const quizzes = useAtomValue(quizzesAtom);
-  const language = useAtomValue(languageAtom);
-
-  const quiz = quizzes[quizIndex];
+  const { quiz, language } = useQuiz();
 
   const handleSingleSelect = (answerNumber: number) => {
     if (selectedAnswer[0] === answerNumber) setSelectedAnswer([]);
@@ -41,11 +32,14 @@ export default function Answer() {
     setSelectedAnswer(newSelectedAnswer);
   };
 
-  const handleQuizOptionMap = {
-    Select: handleSingleSelect,
-    MultiSelect: handleMultiSelect,
-    Order: handleMultiSelect,
-  };
+  const handleQuizOptionMap = useMemo(
+    () => ({
+      Select: handleSingleSelect,
+      MultiSelect: handleMultiSelect,
+      Order: handleMultiSelect,
+    }),
+    [],
+  );
 
   const onClickOption = (answerNumber: number) => {
     if (!isSubmitted) handleQuizOptionMap[quiz.type](answerNumber);

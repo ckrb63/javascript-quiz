@@ -1,12 +1,12 @@
 "use client";
 
-import { isSubmittedAtom, quizIndexAtom, quizzesAtom } from "@/app/atom";
+import { isSubmittedAtom } from "@/app/atom";
 import { Button } from "@/components/ui/button";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useQuiz } from "@/hooks/useQuiz";
+import { useSetAtom } from "jotai";
 
 export default function NextButton() {
-  const quizzes = useAtomValue(quizzesAtom);
-  const [quizIndex, setQuizIndex] = useAtom(quizIndexAtom);
+  const { quizzes, quizIndex, setQuizIndex } = useQuiz();
   const setIsSubmitted = useSetAtom(isSubmittedAtom);
 
   const onClickNextButton = () => {

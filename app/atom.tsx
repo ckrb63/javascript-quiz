@@ -4,12 +4,12 @@ import { quizzes } from "@/data/quiz";
 import { InternationalString } from "@/types/quiz";
 import { atom, useAtom, useSetAtom } from "jotai";
 import { atomWithStorage, loadable } from "jotai/utils";
-import { selectedAnswerAtom } from "./_components/Answer";
 import { Provider } from "jotai";
 import { useEffect } from "react";
 
 export const quizIndexAtom = atom(0);
 export const quizzesAtom = atom(quizzes);
+export const selectedAnswerAtom = atom<number[]>([]);
 export const isSubmittedAtom = atom(false);
 export const languageAtom = atomWithStorage<keyof InternationalString>(
   "language",

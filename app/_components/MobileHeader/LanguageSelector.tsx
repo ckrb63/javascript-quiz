@@ -1,16 +1,15 @@
 "use client";
 
-import { languageAtom } from "@/app/atom";
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useQuiz } from "@/hooks/useQuiz";
 import { languageMap } from "@/lib/language";
-import { useAtom } from "jotai";
 
 export default function LanguageSelector() {
-  const [language, setLanguage] = useAtom(languageAtom);
+  const { language, setLanguage } = useQuiz();
 
   return (
     <AccordionItem value="item-3">

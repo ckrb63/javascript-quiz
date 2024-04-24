@@ -1,14 +1,10 @@
 "use client";
 
-import { languageAtom, quizIndexAtom, quizzesAtom } from "@/app/atom";
 import { CardDescription, CardTitle } from "@/components/ui/card";
-import { useAtomValue } from "jotai";
+import { useQuiz } from "@/hooks/useQuiz";
 
 export default function QuestionText() {
-  const quizzes = useAtomValue(quizzesAtom);
-  const quizIndex = useAtomValue(quizIndexAtom);
-  const language = useAtomValue(languageAtom);
-  const quiz = quizzes[quizIndex];
+  const { quiz, language } = useQuiz();
 
   return (
     <>

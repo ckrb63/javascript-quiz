@@ -1,6 +1,5 @@
 "use client";
 
-import { languageAtom, quizIndexAtom, quizzesAtom } from "@/app/atom";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -10,14 +9,10 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useAtom, useAtomValue } from "jotai";
+import { useQuiz } from "@/hooks/useQuiz";
 
 export default function QuizSelector() {
-  const quizzes = useAtomValue(quizzesAtom);
-  const [quizIndex, setQuizIndex] = useAtom(quizIndexAtom);
-  const language = useAtomValue(languageAtom);
-
-  const quiz = quizzes[quizIndex];
+  const { quiz, quizzes, quizIndex, setQuizIndex, language } = useQuiz();
 
   return (
     <NavigationMenu>

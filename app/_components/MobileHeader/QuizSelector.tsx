@@ -1,21 +1,18 @@
 "use client";
 
-import { languageAtom, quizIndexAtom, quizzesAtom } from "@/app/atom";
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { useAtomValue } from "jotai";
+import { useQuiz } from "@/hooks/useQuiz";
 
 interface Props {
   onSelect: (index: number) => void;
 }
 
 export default function QuizSelector({ onSelect }: Props) {
-  const quizIndex = useAtomValue(quizIndexAtom);
-  const quizzes = useAtomValue(quizzesAtom);
-  const language = useAtomValue(languageAtom);
+  const { quizzes, quizIndex, language } = useQuiz();
 
   return (
     <AccordionItem value="item-2">
